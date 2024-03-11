@@ -9,14 +9,13 @@
  *
  *****************************************************************************/
 /**
- * @file stats.c
- * @brief Analyzes an array and reports analytics on the data
+ * @file <Add File Name> 
+ * @brief <Add Brief Description Here >
  *
- * Takes an array of unsigned char data items and finds
- * the maximum, minimum, mean, and median of the data set.
+ * <Add Extended Description Here>
  *
- * @author gabman15
- * @date 03/11/24
+ * @author <Add FirsName LastName>
+ * @date <Add date >
  *
  */
 
@@ -38,7 +37,7 @@ void main() {
 
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
-  print_statistics(test, SIZE);
+
 }
 
 /* Add other Implementation File Code Here */
