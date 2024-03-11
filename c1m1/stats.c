@@ -41,4 +41,33 @@ void main() {
   print_statistics(test, SIZE);
 }
 
+void print_statistics(unsigned char *arr, unsigned int len) {
+
+}
+
+void print_array(unsigned char *arr, unsigned int len) {
+
+}
+
+unsigned char find_median(unsigned char *arr, unsigned int len) {
+
+}
+
+unsigned char find_mean(unsigned char *arr, unsigned int len) {
+
+}
+
+unsigned char find_maximum(unsigned char *arr, unsigned int len) {
+
+}
+
+unsigned char find_minimum(unsigned char *arr, unsigned int len) {
+
+}
+
+void sort_array(unsigned char *arr, unsigned int len) {
+
+}
+
+
 /* Add other Implementation File Code Here */

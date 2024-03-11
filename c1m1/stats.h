@@ -69,45 +69,51 @@ unsigned char find_median(unsigned char *arr, unsigned int len);
 /**
  * @brief find_mean
  *
- * A function that prints the contents of an array
+ * A function that finds the mean of an array
  *
- * @param arr The array to print statistics about
+ * @param arr The array to find the mean of
  * @param len The array's length
  *
- * @effects Prints the contents of the array
- *
- * @returns nothing
+ * @returns an 8-bit char that is the mean of the array
  */
-void print_array(unsigned char *arr, unsigned int len);
+unsigned char find_mean(unsigned char *arr, unsigned int len);
 
 /**
- * @brief print_array
+ * @brief find_maximum
  *
- * A function that prints the contents of an array
+ * A function that finds the maximum of an array
  *
- * @param arr The array to print statistics about
+ * @param arr The array to find the maximum of
  * @param len The array's length
  *
- * @effects Prints the contents of the array
- *
- * @returns nothing
+ * @returns an 8-bit char that is the maximum of the array
  */
-void print_array(unsigned char *arr, unsigned int len);
+unsigned char find_maximum(unsigned char *arr, unsigned int len);
 
 /**
- * @brief print_array
+ * @brief find_minimum
  *
- * A function that prints the contents of an array
+ * A function that finds the minimum of an array
  *
- * @param arr The array to print statistics about
+ * @param arr The array to find the minimum of
  * @param len The array's length
  *
- * @effects Prints the contents of the array
+ * @returns an 8-bit char that is the minimum of the array
+ */
+unsigned char find_minimum(unsigned char *arr, unsigned int len);
+
+/**
+ * @brief sort_array
+ *
+ * A function that sorts the given array from largest to smallest
+ *
+ * @param arr The array to sort
+ * @param len The array's length
+ *
+ * @effects the array passed in is sorted by reference
  *
  * @returns nothing
  */
-void print_array(unsigned char *arr, unsigned int len);
-
-
+void sort_array(unsigned char *arr, unsigned int len);
 
 #endif /* __STATS_H__ */
