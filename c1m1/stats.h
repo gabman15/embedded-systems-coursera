@@ -22,8 +22,6 @@
 #ifndef __STATS_H__
 #define __STATS_H__
 
-/* Add Your Declarations and Function Comments here */ 
-
 /**
  * @brief print_statistics
  *
