@@ -35,15 +35,16 @@ void main() {
                               200, 122, 150, 90,   92,  87, 177, 244,
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
-
-    printf("Unsorted Array:\n");
+#ifdef VERBOSE
+    PRINTF("Unsorted Array:\n");
     print_array(test,SIZE);
-    printf("\nSorting Array...\n\n");
+    PRINTF("\nSorting Array...\n\n");
     sort_array(test,SIZE);
-    printf("Sorted Array:\n");
+    PRINTF("Sorted Array:\n");
     print_array(test,SIZE);
-    printf("\n");
+    PRINTF("\n");
     print_statistics(test, SIZE);
+#endif VERBOSE
 }
 
 void print_statistics(unsigned char *arr, unsigned int len) {
@@ -51,23 +52,26 @@ void print_statistics(unsigned char *arr, unsigned int len) {
     unsigned char mean = find_mean(arr, len);
     unsigned char max = find_maximum(arr, len);
     unsigned char min = find_minimum(arr, len);
-
-    printf("Statistics:\nMedian: %d\nMean: %d\nMaximum: %d\nMinimum: %d\n",
+#ifdef VERBOSE
+    PRINTF("Statistics:\nMedian: %d\nMean: %d\nMaximum: %d\nMinimum: %d\n",
            median, mean, max, min);
+#endif
 }
 
 void print_array(unsigned char *arr, unsigned int len) {
+#ifdef VERBOSE
     int i;
     for (i = 0; i < len; i++) {
         if (i == len-1)
-            printf("%d",arr[i]);
+            PRINTF("%d",arr[i]);
         else {
-            printf("%d, ",arr[i]);
+            PRINTF("%d, ",arr[i]);
             if (i % 8 == 0 && i != 0)
-                printf("\n");
+                PRINTF("\n");
         }
     }
-    printf("\n");
+    PRINTF("\n");
+#endif
 }
 
 unsigned char find_median(unsigned char *arr, unsigned int len) {

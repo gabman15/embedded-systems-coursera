@@ -90,4 +90,8 @@ void set_all(char * ptr, char value, unsigned int size);
  */
 void clear_all(char * ptr, unsigned int size);
 
+
+
+
+
 #endif /* __MEMORY_H__ */
