@@ -25,6 +25,7 @@
 
 # Platform Overrides
 PLATFORM = MSP432
+GCCVER = OLD
 
 include sources.mk
 
@@ -48,15 +49,20 @@ ifeq ($(PLATFORM), MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
 	OBJDUMP = arm-none-eabi-objdump
+	SIZE = arm-none-eabi-size
 else
 	CC = gcc
 	LD = ld
 	OBJDUMP = objdump
+	SIZE = size
 endif
 
 # Compiler Flags
-CFLAGS = $(PLATCFLAGS) -Wall -Werror -g -O0 -std=c99
-# CFLAGS = $(PLATCFLAGS) -Wall -g -O0 -std=c99
+ifeq ($(GCCVER), OLD)
+	CFLAGS = $(PLATCFLAGS) -Wall -Werror -g -O0 -std=c99
+else
+	CFLAGS = $(PLATCFLAGS) -Wall -g -O0 -std=c99
+endif
 
 CPPFLAGS = -D$(PLATFORM) $(addprefix -I,$(INCLUDES)) -MMD -MP
 
@@ -92,6 +98,7 @@ build: all
 
 .PHONY: all
 all: $(TARGET).out
+	$(SIZE) $<
 
 .PHONY: clean
 clean:
