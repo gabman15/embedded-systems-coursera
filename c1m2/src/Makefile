@@ -31,7 +31,7 @@ include sources.mk
 TARGET = c1m2
 
 # Architectures Specific Flags
-LINKER_FILE = msp432p401r.lds
+LINKER_FILE = ../msp432p401r.lds
 ifeq ($(PLATFORM), MSP432)
 	CPU = cortex-m4
 	ARMARCH = thumb
@@ -56,13 +56,14 @@ endif
 
 # Compiler Flags
 CFLAGS = $(PLATCFLAGS) -Wall -Werror -g -O0 -std=c99
+# CFLAGS = $(PLATCFLAGS) -Wall -g -O0 -std=c99
 
 CPPFLAGS = -D$(PLATFORM) $(addprefix -I,$(INCLUDES)) -MMD -MP
 
 ifeq ($(PLATFORM), MSP432)
-	LDFLAGS = -Wl,-T $(LINKER_FILE) -Map $(TARGET).map
+	LDFLAGS = -Wl,-T $(LINKER_FILE) -Wl,-Map=$(TARGET).map
 else
-	LDFLAGS = -WL,-Map $(TARGET).map
+	LDFLAGS = -Wl,-Map=$(TARGET).map
 endif
 
 OBJS = $(SOURCES:.c=.o)
@@ -75,7 +76,7 @@ DEPS = $(OBJS:.o=.d)
 	$(CC) -S $< $(CFLAGS) $(CPPFLAGS) -o $@
 
 $(TARGET).asm : $(TARGET).out
-	$(OBJDUMP) -d $<
+	$(OBJDUMP) -d $< > $@
 
 # %.o : %.c
 # 	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
