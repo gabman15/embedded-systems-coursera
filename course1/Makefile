@@ -10,13 +10,17 @@
 #*****************************************************************************
 
 #------------------------------------------------------------------------------
-# <Put a Description Here>
+# Makefile for Embedded Systems Course Projects
 #
 # Use: make [TARGET] [PLATFORM-OVERRIDES]
 #
 # Build Targets:
-#      <Put a description of the supported targets here>
-#
+#      compile-all: Compiles all source files
+#      all: Builds Target executable
+#      build: Builds Target executable
+#      clean: Clears build directory
+#      %.i, %.asm, %.o
+#      
 # Platform Overrides:
 #      <Put a description of the supported Overrides here
 #
@@ -28,10 +32,10 @@ PLATFORM = MSP432
 GCCVER = OLD
 
 ifdef VERBOSE
-	VERBOSITY=-DVERBOSE
+	VERBOSITY = -DVERBOSE
 endif
 ifdef COURSE1
-	COURSESEL=-DCOURSE1
+	COURSESEL = -DCOURSE1
 endif
 
 include sources.mk
@@ -77,7 +81,7 @@ endif
 CPPFLAGS = -D$(PLATFORM) $(VERBOSITY) $(COURSESEL) $(addprefix -I,$(INCLUDES)) -MMD -MP
 
 ifeq ($(PLATFORM), MSP432)
-	LDFLAGS = -Wl,-T $(LINKER_FILE) -Wl,-Map=$(TARGET).map
+	LDFLAGS = -Wl,-T $(LINKER_FILE) -Wl,-Map=$(BUILDDIR)/$(TARGET).map
 else
 	LDFLAGS = -Wl,-Map=$(TARGET).map
 endif
@@ -106,9 +110,6 @@ $(BUILDDIR)/%.o : $(SRCDIR)/%.c
 	mkdir -p $(dir $@)
 	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
 
-# %.o : %.c
-# 	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
-
 $(BUILDDIR)/$(TARGET).out : $(OBJS)
 	mkdir -p $(dir $@)
 	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $@
@@ -120,7 +121,7 @@ compile-all: $(OBJS)
 build: all
 
 .PHONY: all
-all: $(TARGET).out
+all: $(BUILDDIR)/$(TARGET).out
 	$(SIZE) $(BUILDDIR)/$<
 
 .PHONY: clean
