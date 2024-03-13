@@ -51,3 +51,44 @@ void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
 
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
+    uint8_t * temp = malloc(length * sizeof(uint8_t));
+
+    my_memcopy(src, temp, length);
+    my_memcopy(temp, dst, length);
+    
+    free(temp);
+    return dst;
+}
+
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {
+    int i;
+    for (i = 0; i < length; i++)
+        *(dst + i) = *(src + i);
+
+    return dst;
+}
+
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
+    int i;
+    for (i = 0; i < length; i++)
+        *(src + i) = value;
+    return src;
+}
+
+uint8_t * my_memzero(uint8_t * src, size_t length) {
+    my_memset(src, length, 0);
+    return src;
+}
+
+uint8_t * my_reverse(uint8_t * src, size_t length) {
+    uint8_t * temp = malloc(length * sizeof(uint8_t));
+
+    my_memcopy(src, temp, length);
+
+    int i;
+    for (i = length - 1; i >= 0; i--)
+        *(src + i) = *(temp + i);
+
+    return src;
+}

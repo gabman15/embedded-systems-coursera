@@ -176,7 +176,7 @@ uint8_t * my_reverse(uint8_t * src, size_t length);
  *
  * @return a pointer to the memory location that has been allocated
  */
-int32_t * reserve_words(size_t length);
+uint32_t * reserve_words(size_t length);
 
 /**
  * @brief Frees memory allocations
