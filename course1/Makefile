@@ -86,7 +86,7 @@ else
 	LDFLAGS = -Wl,-Map=$(TARGET).map
 endif
 
-SRCS = $(addprefix $(SRCDIR)/,$(SOURCES))
+#SRCS = $(addprefix $(SRCDIR)/,$(SOURCES))
 OBJS = $(SOURCES:%.c=$(BUILDDIR)/%.o)
 DEPS = $(OBJS:.o=.d)
 
