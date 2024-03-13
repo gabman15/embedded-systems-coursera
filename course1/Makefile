@@ -27,12 +27,22 @@
 PLATFORM = MSP432
 GCCVER = OLD
 
+ifdef VERBOSE
+	VERBOSITY=-DVERBOSE
+endif
+ifdef COURSE1
+	COURSESEL=-DCOURSE1
+endif
+
 include sources.mk
 
-TARGET = c1m2
+TARGET = course1
+
+SRCDIR = ./src
+BUILDDIR = ./build
 
 # Architectures Specific Flags
-LINKER_FILE = ../msp432p401r.lds
+LINKER_FILE = msp432p401r.lds
 ifeq ($(PLATFORM), MSP432)
 	CPU = cortex-m4
 	ARMARCH = thumb
@@ -64,7 +74,7 @@ else
 	CFLAGS = $(PLATCFLAGS) -Wall -g -O0 -std=c99
 endif
 
-CPPFLAGS = -D$(PLATFORM) $(addprefix -I,$(INCLUDES)) -MMD -MP
+CPPFLAGS = -D$(PLATFORM) $(VERBOSITY) $(COURSESEL) $(addprefix -I,$(INCLUDES)) -MMD -MP
 
 ifeq ($(PLATFORM), MSP432)
 	LDFLAGS = -Wl,-T $(LINKER_FILE) -Wl,-Map=$(TARGET).map
@@ -72,22 +82,35 @@ else
 	LDFLAGS = -Wl,-Map=$(TARGET).map
 endif
 
-OBJS = $(SOURCES:.c=.o)
+SRCS = $(addprefix $(SRCDIR)/,$(SOURCES))
+OBJS = $(SOURCES:%.c=$(BUILDDIR)/%.o)
 DEPS = $(OBJS:.o=.d)
 
-%.i : %.c
+.PHONY: test
+test:
+	echo $(DEPS)
+
+$(BUILDDIR)/%.i : $(SRCDIR)/%.c
+	mkdir -p $(dir $@)
 	$(CC) -E $< $(CPPFLAGS) -o $@
 
-%.asm : %.c
+$(BUILDDIR)/%.asm : $(SRCDIR)/%.c
+	mkdir -p $(dir $@)
 	$(CC) -S $< $(CFLAGS) $(CPPFLAGS) -o $@
 
-$(TARGET).asm : $(TARGET).out
+$(BUILDDIR)/$(TARGET).asm : $(TARGET).out
+	mkdir -p $(dir $@)
 	$(OBJDUMP) -d $< > $@
+
+$(BUILDDIR)/%.o : $(SRCDIR)/%.c
+	mkdir -p $(dir $@)
+	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
 
 # %.o : %.c
 # 	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
 
-$(TARGET).out : $(OBJS)
+$(BUILDDIR)/$(TARGET).out : $(OBJS)
+	mkdir -p $(dir $@)
 	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $@
 
 .PHONY: compile-all
@@ -98,10 +121,10 @@ build: all
 
 .PHONY: all
 all: $(TARGET).out
-	$(SIZE) $<
+	$(SIZE) $(BUILDDIR)/$<
 
 .PHONY: clean
 clean:
-	rm -f $(OBJS) $(TARGET).out $(TARGET).map *.i *.asm *.d
+	rm -r $(BUILDDIR)
 
 -include $(DEPS)

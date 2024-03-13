@@ -14,14 +14,20 @@ ifeq ($(PLATFORM),MSP432)
 		  	  memory.c \
 			  interrupts_msp432p401r_gcc.c \
 			  startup_msp432p401r_gcc.c \
-			  system_msp432p401r.c
+			  system_msp432p401r.c \
+			  course1.c \
+			  data.c \
+			  stats.c
 
-	INCLUDES = ../include/common \
-			   ../include/msp432 \
-			   ../include/CMSIS
+	INCLUDES = include/common \
+			   include/msp432 \
+			   include/CMSIS
 else
 	SOURCES = main.c \
-		 	  memory.c
+		 	  memory.c \
+			  course1.c \
+			  data.c \
+			  stats.c
 
-	INCLUDES = ../include/common
+	INCLUDES = include/common
 endif

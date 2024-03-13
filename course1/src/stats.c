@@ -28,7 +28,7 @@
 /* Size of the Data Set */
 #define SIZE (40)
 
-void main() {
+/*int main() {
 
     unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
                               114, 88,   45,  76, 123,  87,  25,  23,
@@ -44,15 +44,17 @@ void main() {
     print_array(test,SIZE);
     PRINTF("\n");
     print_statistics(test, SIZE);
-#endif VERBOSE
-}
+#endif
+    return 0;
+}*/
 
 void print_statistics(unsigned char *arr, unsigned int len) {
+#ifdef VERBOSE
     unsigned char median = find_median(arr, len);
     unsigned char mean = find_mean(arr, len);
     unsigned char max = find_maximum(arr, len);
     unsigned char min = find_minimum(arr, len);
-#ifdef VERBOSE
+
     PRINTF("Statistics:\nMedian: %d\nMean: %d\nMaximum: %d\nMinimum: %d\n",
            median, mean, max, min);
 #endif
