@@ -39,6 +39,8 @@
 # Platform Overrides
 PLATFORM = MSP432
 GCCVER = OLD
+VERBOSE = 0
+COURSE1 = 0
 
 ifeq ($(VERBOSE),1)
 	VERBOSITY = -DVERBOSE
