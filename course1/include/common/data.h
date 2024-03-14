@@ -1,3 +1,14 @@
+/**
+ * @file data.h
+ * @brief Basic data manipulation
+ *
+ * This header file provides an abstraction for
+ * integer and ascii string data conversions
+ *
+ * @author gabman15
+ * @date 03/14/24
+ */
+
 #ifndef __DATA_H__
 #define __DATA_H__
 
