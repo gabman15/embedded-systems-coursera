@@ -122,7 +122,7 @@ build: all
 
 .PHONY: all
 all: $(BUILDDIR)/$(TARGET).out
-	$(SIZE) $(BUILDDIR)/$<
+	$(SIZE) $<
 
 .PHONY: clean
 clean:

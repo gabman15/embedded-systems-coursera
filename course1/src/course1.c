@@ -26,7 +26,7 @@
 
 int8_t test_data1() {
   uint8_t * ptr;
-  int32_t num = -4096;
+  int32_t num = -4094;
   uint32_t digits;
   int32_t value;
 

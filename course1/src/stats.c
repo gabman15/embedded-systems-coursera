@@ -62,17 +62,18 @@ void print_statistics(unsigned char *arr, unsigned int len) {
 
 void print_array(unsigned char *arr, unsigned int len) {
 #ifdef VERBOSE
+    PRINTF("Printing Array:\n");
     int i;
     for (i = 0; i < len; i++) {
         if (i == len-1)
-            PRINTF("%d",arr[i]);
+            PRINTF("%3d",arr[i]);
         else {
-            PRINTF("%d, ",arr[i]);
-            if (i % 8 == 0 && i != 0)
+            PRINTF("%3d, ",arr[i]);
+            if ((i+1) % 8 == 0)
                 PRINTF("\n");
         }
     }
-    PRINTF("\n");
+    PRINTF("\n\n");
 #endif
 }
 

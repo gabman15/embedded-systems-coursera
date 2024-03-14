@@ -87,8 +87,18 @@ uint8_t * my_reverse(uint8_t * src, size_t length) {
     my_memcopy(src, temp, length);
 
     int i;
-    for (i = length - 1; i >= 0; i--)
-        *(src + i) = *(temp + i);
+    for (i = 0; i < length; i++)
+        *(src + i) = *(temp + (length - 1) - i);
 
+    free(temp);
+    
     return src;
+}
+
+uint32_t * reserve_words(size_t length) {
+    return malloc(length * sizeof(int32_t));
+}
+
+void free_words(uint32_t * src) {
+    free(src);
 }
