@@ -94,7 +94,7 @@ CPPFLAGS = -D$(PLATFORM) $(VERBOSITY) $(COURSESEL) $(addprefix -I,$(INCLUDES)) -
 ifeq ($(PLATFORM), MSP432)
 	LDFLAGS = -Wl,-T $(LINKER_FILE) -Wl,-Map=$(BUILDDIR)/$(TARGET).map
 else
-	LDFLAGS = -Wl,-Map=$(TARGET).map
+	LDFLAGS = -Wl,-Map=$(BUILDDIR)/$(TARGET).map
 endif
 
 #SRCS = $(addprefix $(SRCDIR)/,$(SOURCES))
