@@ -22,8 +22,17 @@
 #      %.i, %.asm, %.o
 #      
 # Platform Overrides:
-#      <Put a description of the supported Overrides here
+#      PLATFORM = MSP432, HOST
+#      Compile for the MSP432 embedded system or the host system
 #
+#      GCCVER = OLD, NEW
+#      The libraries for the MSP432 do not compile without warnings on the latest gcc
+#
+#      VERBOSE = 1, 0
+#      Will enable more debug output
+#
+#      COURSE1 = 1, 0
+#      Will enable the course1 test code
 #------------------------------------------------------------------------------
 
 
@@ -31,10 +40,10 @@
 PLATFORM = MSP432
 GCCVER = OLD
 
-ifdef VERBOSE
+ifeq ($(VERBOSE),1)
 	VERBOSITY = -DVERBOSE
 endif
-ifdef COURSE1
+ifeq ($(COURSE1),1)
 	COURSESEL = -DCOURSE1
 endif
 
